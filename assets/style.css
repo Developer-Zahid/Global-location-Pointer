@@ -1,0 +1,127 @@
+html{
+    background-color: #222;
+  }
+  *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .globe-wrapper{
+    position: relative;
+  }
+
+  #globe{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: -1;
+  }
+
+  img{
+    display: block;
+    max-width: 100%;
+    width: 100%;
+  }
+
+.location-box,
+.location-box-content,
+.location-box::before,
+.location-box::after
+{
+position: absolute;
+}
+
+.location-box{
+--border-width: 1px;
+--border-radius: 32px;
+--shape-size: 23px;
+--dot-size: 12px;
+display: inline-block;
+transform: translateX(calc((var(--border-radius) + (var(--shape-size) / 2) - (var(--border-width) * 2)) * -1)) translateY(-150%);
+background: transparent;
+padding: 0;
+border: 0;
+outline: 0;
+}
+
+.location-box::before,
+.location-box::after
+{
+content: "";
+}
+
+.location-box-content,
+.location-box::before
+{
+background-color: rgba(18, 27, 37, 0.50);
+border: var(--border-width) solid rgba(255,255,255,0.5);
+transition: background-color 0.3s linear, border-color 0.3s linear;
+}
+
+.location-box-content{
+bottom: 0;
+width: max-content;
+color: #fff;
+display: inline-flex;
+flex-direction: column;
+padding: 20px 25px;
+border-radius: var(--border-radius);
+clip-path:
+  polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    66.125px 100%,
+    66.125px calc(100% - var(--border-width)),
+    calc(var(--border-radius) + var(--border-width)) calc(100% - var(--border-width)),
+    calc(var(--border-radius) + var(--border-width)) 100%,
+    0 100%
+  );
+}
+.location-box::before{
+top: calc(100% - (var(--border-width) - 0.25px));
+left: var(--border-radius);
+width: var(--shape-size);
+height: var(--shape-size);
+border-bottom-left-radius: 4px;
+clip-path: polygon(0 0, 100% 100%, 0 100%);
+transform: rotate(-45deg);
+transform-origin: left top;
+}
+
+.location-box::after{
+width: var(--dot-size);
+height: var(--dot-size);
+border-radius: 10rem;
+background-color: #fff;
+top: calc(100% + var(--shape-size) + 3px);
+left: calc((var(--border-radius) + var(--shape-size) + (var(--border-width) * 2)) - var(--dot-size));
+box-shadow: 0 0 0 2px rgba(255,255,255,0.4);
+}
+
+.location-box-header{
+display: grid;
+grid-template-rows: 0fr;
+transition: grid-template-rows .05s ease-in;
+}
+
+.location-box-header-wrapper{
+overflow: hidden;
+}
+
+.location-box:is(:hover, :focus-visible) .location-box-content,
+.location-box:is(:hover, :focus-visible)::before
+{
+background-color: rgba(255, 196, 12, 0.20);
+border-color: #FFC40C;
+}
+.location-box:is(:hover, :focus-visible)::after{
+background-color: #FFC40C;;
+}
+.location-box:is(:hover, :focus-visible) .location-box-header{
+grid-template-rows: 1fr;
+transition-duration: 0.2s;
+}
