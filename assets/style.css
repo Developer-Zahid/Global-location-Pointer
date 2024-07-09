@@ -45,6 +45,7 @@ background: transparent;
 padding: 0;
 border: 0;
 outline: 0;
+cursor: pointer;
 }
 
 .location-box::before,
@@ -100,6 +101,7 @@ background-color: #fff;
 top: calc(100% + var(--shape-size) + 3px);
 left: calc((var(--border-radius) + var(--shape-size) + (var(--border-width) * 2)) - var(--dot-size));
 box-shadow: 0 0 0 2px rgba(255,255,255,0.4);
+ transition: box-shadow 0.3s linear;
 }
 
 .location-box-header{
@@ -112,16 +114,18 @@ transition: grid-template-rows .05s ease-in;
 overflow: hidden;
 }
 
-.location-box:is(:hover, :focus-visible) .location-box-content,
-.location-box:is(:hover, :focus-visible)::before
+.location-box:is(:hover, :focus-visible, .active) .location-box-content,
+.location-box:is(:hover, :focus-visible, .active)::before
 {
 background-color: rgba(255, 196, 12, 0.20);
 border-color: #FFC40C;
 }
-.location-box:is(:hover, :focus-visible)::after{
-background-color: #FFC40C;;
+.location-box:is(:hover, :focus-visible, .active)::after{
+  box-shadow:
+  	0 0 0 4px #FFC40C,
+    0 0 0 8px rgba(255, 196, 12, .28);
 }
-.location-box:is(:hover, :focus-visible) .location-box-header{
+.location-box:is(:hover, :focus-visible, .active) .location-box-header{
 grid-template-rows: 1fr;
 transition-duration: 0.2s;
 }
